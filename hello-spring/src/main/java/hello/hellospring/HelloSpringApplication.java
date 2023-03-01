@@ -1,4 +1,4 @@
-package hello.hellospring;
+package hello.hellospring;//여기경로를 포함한 하위경로만 스프링빈으로 등록함.
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
