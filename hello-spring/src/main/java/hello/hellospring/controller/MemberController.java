@@ -26,6 +26,8 @@ public class MemberController {
     //멤버서비스는 순수한 자바클래스라서 스프링이 얘를 알수가없다. 그래서 서비스에@Service추가해야함.
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+        System.out.println("memberService= "+memberService.getClass());
+        //aop적용되면, 멤버서비스를 가지고 복제해서 코드를 조작하는기술.(프록시)
     }
     
     @PostMapping("/members/new")

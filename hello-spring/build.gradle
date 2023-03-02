@@ -15,8 +15,11 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'//junit5버전 라이브러리
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'//JDBC
+//	implementation 'org.springframework.boot:spring-boot-starter-jdbc'//JDBC
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'//JPA
 	runtimeOnly 'com.h2database:h2'//db랑붙을때 데이터베이스가제공하는클라이언트가필요
 }
 

@@ -5,14 +5,19 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+
 //@Service
+@Transactional // JPA를 쓰려면 항상있어야함 //데이터를 저장하거나 변경할때 항상있어야함
+
 public class MemberService {
 
     private final MemberRepository memberRepository;
-//    @Autowired// 이걸 생성자위에 쓰면 생성자주입이다.  (필드주입 ,세터주입은 안좋다)
+
+    //    @Autowired// 이걸 생성자위에 쓰면 생성자주입이다.  (필드주입 ,세터주입은 안좋다)
     //조립시점에 생성자로 한번만 딱 조립해놓고 끝내고 그다음에 변경못하게 막아버림.
     public MemberService(MemberRepository memberRepository) {
         //생성자주입
@@ -24,6 +29,7 @@ public class MemberService {
         validateDuplicateMember(member);//같은이름있는 중복회원X
         memberRepository.save(member);
         return member.getId();
+
     }
 
     private void validateDuplicateMember(Member member) {
