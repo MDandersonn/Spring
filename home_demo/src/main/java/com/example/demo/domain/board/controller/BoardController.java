@@ -17,10 +17,10 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register")//http://localhost:7777/board/register로 데이터 보내온거 받아옴
     public void boardRegister (@RequestBody BoardRequest boardRequest) {
-        log.info("boardRegister()");
+        log.info("boardRegister()");//로깅
 
-        boardService.register(boardRequest);
+        boardService.register(boardRequest);//자바객체를 보드서비스의 register메서드로 전달
     }
 }

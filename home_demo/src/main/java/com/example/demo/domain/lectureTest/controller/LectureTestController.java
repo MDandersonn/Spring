@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
+@Slf4j//로깅
 @RestController
 @RequestMapping("/spring-2nd")
 public class LectureTestController {
 
-    @GetMapping("/first")
+    @GetMapping("/first") // http://localhost:7777/spring-2nd/first
     public String helloSpring () {
         log.info("helloSpring(): 이거 왜 안돼 ?");
 

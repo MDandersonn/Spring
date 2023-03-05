@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Service
+@Service//
 public class BoardServiceImpl implements BoardService {
 
     final private BoardRepository boardRepository;
@@ -23,6 +23,6 @@ public class BoardServiceImpl implements BoardService {
         board.setWriter(boardRequest.getWriter());
         board.setContent(boardRequest.getContent());
 
-        boardRepository.save(board);
+        boardRepository.save(board);//jpa이용하여 insert문실행.
     }
 }
