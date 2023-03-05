@@ -12,7 +12,11 @@ import java.util.Optional;
 
 //@Service
 @Transactional // JPA를 쓰려면 항상있어야함 //데이터를 저장하거나 변경할때 항상있어야함
-
+/*
+* 스프링은 해당 클래스의 메서드를 실행할 때 트랜잭션을 시작하고, 메서드가 정상 종료되면 트랜잭션을
+커밋한다. 만약 런타임 예외가 발생하면 롤백한다.
+JPA를 통한 모든 데이터 변경은 트랜잭션 안에서 실행해야 한다. 그래서 여기에 @트랜잭셔널 을 적어주는거임
+* */
 public class MemberService {
 
     private final MemberRepository memberRepository;

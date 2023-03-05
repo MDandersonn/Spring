@@ -15,7 +15,7 @@ public class LectureTestController {
     public String helloSpring () {
         log.info("helloSpring(): 이거 왜 안돼 ?");
 
-        return "Hello Spring";
+        return "Hello Spring!";
     }
 
     @GetMapping("/second")

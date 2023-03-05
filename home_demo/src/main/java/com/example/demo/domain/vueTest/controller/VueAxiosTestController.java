@@ -5,8 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j//로깅을 위함
-/*
-* */
+
 @RestController
 @RequestMapping("/vue/first")
 //@RequestMapping은 method를 생략하면 GET 방식과 POST 방식을 모두 처리해준다.
