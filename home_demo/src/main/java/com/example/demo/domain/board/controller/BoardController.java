@@ -39,4 +39,18 @@ public class BoardController {
 
         return boardService.read(boardId);
     }
+
+    @DeleteMapping("/{boardId}")
+    public void boardRemove(@PathVariable("boardId") Long boardId) {
+        log.info("boardRemove()");
+
+        boardService.remove(boardId);
+    }
+
+    @PutMapping("/{boardId}")
+    public Board boardModify(@PathVariable("boardId") Long boardId, @RequestBody BoardRequest boardRequest) {
+//{ title, writer, content }
+        log.info("boardModify(): " + boardRequest + "id: " + boardId);
+        return boardService.modify(boardId, boardRequest);
+    }
 }
