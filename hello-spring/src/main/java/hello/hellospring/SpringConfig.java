@@ -48,7 +48,11 @@ public class SpringConfig {
     @Bean
     public MemberService memberService(){
 //        return new MemberService(memberRepository());//memory,Jdbc,JdbcTemplate,JPA 쓸때
-        return new MemberService(memberRepository);//스프링dataJPA용
+        return new MemberService(memberRepository);//스프링dataJPA
+        //return하면 해당타입의 객체가 스프링IOC 컨테이너 안에 빈으로 등록됨.
+        //서로간의 의존성주입을 IOC가 해줌. 즉  생성자에 매개변수는 스프링IOC컨테이너가 빈을 찾아서 넣어주는것
+        //의존성주입은 빈 끼리만 가능 . 즉 스프링IOC컨테이너안에 있는 빈끼리만 의존성주입가능
+
 
     }
 //    @Bean

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class TimeTraceAop {
     @Around("execution(* hello.hellospring..*(..))")
     //공통사항이 적용될 파일을 선정( 모두 다 로 설정했음)
-    /*가짜 멤버서비스를만듦(프록시) 컨테이너에 스프링빈을 등록할때
+    /*가짜 스프링빈을 만듦(프록시) 컨테이너에 스프링빈을 등록할때
     * 가짜 스프링빈을 앞에 사워놈 가짜스프링빈이 끝나면 joinPoint.proceed()하면
     * 진짜를 호출해줌*/
     public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {

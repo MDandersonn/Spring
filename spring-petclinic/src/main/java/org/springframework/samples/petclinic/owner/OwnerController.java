@@ -18,6 +18,7 @@ package org.springframework.samples.petclinic.owner;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -46,11 +47,28 @@ class OwnerController {
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 
-	private final OwnerRepository owners;
+	//주의할것은 OwnerRepository 가 이미 빈에 등록되어있어야한다.
+//방법1
+//	@Autowired
+//	private  OwnerRepository owners;
 
-	public OwnerController(OwnerRepository clinicService) {
-		this.owners = clinicService;
+// 방법2 생성자를 이용하는법(생성자위에 @Autowired는생략가능)
+//	private final OwnerRepository owners;//다른 레퍼런스로 바뀌지않게끔 보장하기위해 final 붙인거다.
+//
+//	public OwnerController(OwnerRepository clinicService) {
+//		this.owners = clinicService;
+//	}
+
+	//방법3 세터를이용하는법
+	private  OwnerRepository owners;
+	@Autowired
+	public void setOwners(OwnerRepository owners) {
+		this.owners = owners;
 	}
+//생성자를 만드는방법이 좋은이유: 필수적으로 사용해야하는 OwnerRepository가 없으면 OwnerController인스턴스를 만들지못하도록
+//	강제할수있다.
+
+
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
