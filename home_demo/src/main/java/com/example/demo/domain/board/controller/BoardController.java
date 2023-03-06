@@ -1,9 +1,12 @@
 package com.example.demo.domain.board.controller;
 
 import com.example.demo.domain.board.controller.request.BoardRequest;
+import com.example.demo.domain.board.entity.Board;
 import com.example.demo.domain.board.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -22,5 +25,18 @@ public class BoardController {
         log.info("boardRegister()");//로깅
 
         boardService.register(boardRequest);//자바객체를 보드서비스의 register메서드로 전달
+    }
+    @GetMapping("/list")
+    public List<Board> boardList () {
+        log.info("boardList()");
+
+        return boardService.list();//이걸 다시 Vue.js로 반환함. then()안의 res로 전달
+    }
+
+    @GetMapping("/{boardId}")//가변인자면 이렇게받나?
+    public Board boardRead(@PathVariable("boardId") Long boardId) {
+        log.info("boardRead()");
+
+        return boardService.read(boardId);
     }
 }
