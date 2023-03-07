@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloController {
 	@GetMapping("/hello")
-	@ResponseBody
+	@ResponseBody// URL 요청에 대한 응답으로 문자열을 리턴하라는 의미
 	public String hello() {
-		return "hello World!";
+		return "hello World@#@ㅁㅇ@!!!";
 	}
 
 }
