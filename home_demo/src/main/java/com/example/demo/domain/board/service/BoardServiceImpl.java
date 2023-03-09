@@ -38,12 +38,10 @@ public class BoardServiceImpl implements BoardService {
     public Board read(Long boardId) {
         // 일 수도 있고 아닐 수도 있고
         Optional<Board> maybeBoard = boardRepository.findById(boardId);
-
         if (maybeBoard.isEmpty()) {
             log.info("읽을 수가 없드아!");
             return null;
         }
-
         return maybeBoard.get();
     }
 
@@ -55,7 +53,6 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Board modify(Long boardId, BoardRequest boardRequest) {
         Optional<Board> maybeBoard = boardRepository.findById(boardId);
-
         if (maybeBoard.isEmpty()) {
             System.out.println("Board 정보를 찾지 못했습니다: " + boardId);
             return null;
