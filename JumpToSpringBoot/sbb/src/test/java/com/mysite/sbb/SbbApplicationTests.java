@@ -83,5 +83,11 @@ class SbbApplicationTests {
 		System.out.println("q1의 아이디: "+ q1.getId());
 		System.out.println("q6의 아이디: "+ q6.getId());
 		assertEquals(q1.getId(), q6.getId());
+		
+		  List<Question> qList = this.questionRepository.findBySubjectLike("sbb%");
+	        Question q = qList.get(0);
+	        assertEquals("sbb가 무엇인가요?", q.getSubject());
+		
+		
 	}
 }
