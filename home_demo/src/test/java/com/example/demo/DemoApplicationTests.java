@@ -13,10 +13,8 @@ import java.util.Optional;
 
 @SpringBootTest
 class DemoApplicationTests {
-
 	@Autowired
 	private BoardRepository boardRepository;
-
 	@Test
 	void boardTest() {
 

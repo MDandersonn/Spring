@@ -17,6 +17,7 @@ public class BoardTests {
     @Test
     public void 게시물_저장_테스트(){
         BoardRequest boardRequest = new BoardRequest("이거","정말","되나");
+//        System.out.println(boardService.register(boardRequest));
         boardService.register(boardRequest);
     }
     @Test
@@ -46,9 +47,9 @@ public class BoardTests {
     public void 게시판_구동_전체_테스트 () {
         BoardRequest boardRequest =
                 new BoardRequest("이거", "정말", "되냐");
-        boardService.register(boardRequest);
-        Long lastBoardId = boardService.getLastEntityId();
-
+        Board board=boardService.register(boardRequest);
+//      Long lastBoardId = boardService.getLastEntityId();//id중 최대값을 가져와서 적용시킨다.
+        Long lastBoardId = board.getBoardId();// 보드ID를 가져와서 적용시킨다.
         System.out.println("초기 등록: " + boardService.read(lastBoardId));
 
         boardService.modify(lastBoardId, new BoardRequest(
