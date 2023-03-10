@@ -33,10 +33,10 @@ public class BoardController {
     }
 
     @PostMapping("/register")//http://localhost:7777/board/register로 데이터 보내온거 받아옴
-    public void boardRegister (@RequestBody BoardRequest boardRequest) {//UI에서 요청온것을 자바객체로 바꿔줌
+    public Board boardRegister (@RequestBody BoardRequest boardRequest) {//UI에서 요청온것을 자바객체로 바꿔줌
         log.info("boardRegister()");//로깅
 
-        boardService.register(boardRequest);//자바객체를 보드서비스의 register메서드로 전달
+        return boardService.register(boardRequest);//자바객체를 보드서비스의 register메서드로 전달
     }
     @GetMapping("/list")
     public List<Board> boardList () {
