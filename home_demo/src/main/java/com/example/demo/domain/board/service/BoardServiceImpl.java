@@ -38,6 +38,7 @@ public class BoardServiceImpl implements BoardService {
     public Board read(Long boardId) {
         // 일 수도 있고 아닐 수도 있고
         Optional<Board> maybeBoard = boardRepository.findById(boardId);
+        //null.get()은 널포인트 에러난다.
         if (maybeBoard.isEmpty()) {
             log.info("읽을 수가 없드아!");
             return null;
@@ -62,5 +63,19 @@ public class BoardServiceImpl implements BoardService {
         board.setContent(boardRequest.getContent());
         boardRepository.save(board);
         return board;
+    }
+
+    @Override
+    public List<Board> bigMisstake(Long boardId, BoardRequest boardRequest) {
+        return boardRepository.findByBoardIdAndWriter(boardId, boardRequest.getWriter());
+    }
+    @Override
+    public Long getCount() {
+        return boardRepository.countBy();
+    }
+    @Override
+    public Long getLastEntityId() {
+        Board board = boardRepository.findFirstByOrderByBoardIdDesc();
+        return board.getBoardId();
     }
 }
