@@ -23,15 +23,7 @@ public class AppConfig {//객체의 생성과 연결 담당.
 //    }
 
     //아래와 같이  명확하게 역할이 보이게 리팩토링한다.
-    @Bean//스프링컨테이너에 등록을해줌
-    public MemberRepository memberRepository(){
-        return new MemoryMemberRepository();
-    }
-    @Bean
-    public DiscountPolicy discountPolicy() {
-//        return new FixDiscountPolicy();
-        return new RateDiscountPolicy();
-    }
+
     @Bean
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
@@ -40,5 +32,15 @@ public class AppConfig {//객체의 생성과 연결 담당.
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
+    @Bean//스프링컨테이너에 등록을해줌
+    public MemberRepository memberRepository(){
+        return new MemoryMemberRepository();//어떤 구현체 레포지토리를 넣어줄지선택
+    }
+    @Bean
+    public DiscountPolicy discountPolicy() {
+//        return new FixDiscountPolicy();
+        return new RateDiscountPolicy();//어떤 구현체 레포지토리(할인정책)를 넣어줄지선택
+    }
+
 
 }
