@@ -12,8 +12,7 @@ import hello.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration//설정정보 //싱글톤패턴유지해줌(하위클래스만들어서)
-//이게없으면 스프링컨테이너에서 빈을 관리하지 못함.
+@Configuration//설정정보 //싱글톤패턴유지해줌(하위클래스만들어서)//이게없으면 스프링컨테이너에서 빈을 관리하지 못함.
 public class AppConfig {//객체의 생성과 연결 담당.
 //    public MemberService memberService () {
 //        return new MemberServiceImpl(new MemoryMemberRepository());
@@ -27,8 +26,9 @@ public class AppConfig {//객체의 생성과 연결 담당.
 
     //@Bean memberService 호출-> new MemoryMemberRepository()생성
     //@Bean orderService 호출-> new MemoryMemberRepository()생성
-    //두번 호출되서 두번 생성 됨 ,  이러면 싱글톤이 깨지나?
-
+    //두번 호출되서 두번 생성 됨 ,  이러면 싱글톤이 깨지나? -> no! 스프링컨테이너에서 싱글톤 유지시켜줌
+        //@Bean이 붙은 메서드마다 이미 스프링 빈이 존재하면 존재하는 빈을 반환하고, 스프링 빈이 없으면
+        //생성해서 스프링 빈으로 등록하고 반환하는 코드가 동적으로 만들어진다.
     @Bean
     public MemberService memberService() {
         System.out.println("Call AppConfig.memberService");
