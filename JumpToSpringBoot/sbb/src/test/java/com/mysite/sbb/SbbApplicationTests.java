@@ -1,6 +1,7 @@
 package com.mysite.sbb;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -83,11 +84,24 @@ class SbbApplicationTests {
 		System.out.println("q1의 아이디: "+ q1.getId());
 		System.out.println("q6의 아이디: "+ q6.getId());
 		assertEquals(q1.getId(), q6.getId());
-		
+//like사용		
 		  List<Question> qList = this.questionRepository.findBySubjectLike("sbb%");
-	        Question q = qList.get(0);
-	        assertEquals("sbb가 무엇인가요?", q.getSubject());
-		
+	        Question q7 = qList.get(0);
+	        assertEquals("sbb가 무엇인가요?", q7.getSubject());
+//데이터 수정하기
+	        Optional<Question> oq2 = this.questionRepository.findById(1);
+	        assertTrue(oq2.isPresent());
+	        Question q8 = oq2.get();
+	        q8.setSubject("수정된 제목");
+	        this.questionRepository.save(q8);
+	        
+//데이터 삭제하기
+	        assertEquals(2, this.questionRepository.count());
+	        Optional<Question> oq3 = this.questionRepository.findById(1);
+	        assertTrue(oq.isPresent());
+	        Question q9 = oq3.get();
+	        this.questionRepository.delete(q9);
+	        assertEquals(1, this.questionRepository.count());
 		
 	}
 }
