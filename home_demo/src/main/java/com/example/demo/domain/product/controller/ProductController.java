@@ -1,14 +1,14 @@
 package com.example.demo.domain.product.controller;
 
-import com.example.demo.domain.board.controller.request.BoardRequest;
-import com.example.demo.domain.board.entity.Board;
-import com.example.demo.domain.product.controller.request.ProductRequest;
+import com.example.demo.domain.product.controller.dto.*;
+import com.example.demo.domain.product.controller.dto.ProductRequest;
 import com.example.demo.domain.product.entity.Product;
 import com.example.demo.domain.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,22 +21,35 @@ public class ProductController {
 
     final private ProductService productService;
 
-    @PostMapping("/register")
+/*//이미지있기 전 코드
+        @PostMapping("/register")
     public void productRegister(@RequestBody ProductRequest productRequest) {
         log.info("productRegister()");
 
         productService.register(productRequest);
     }
 
+ */
+    //이미지 업로드 후 코드
+    @PostMapping(value = "/register",
+            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public void productRegister(//@RequestPart(value = "fileList") List<MultipartFile> fileList,
+                                @RequestPart(value = "imageFileList") List<MultipartFile> imageFileList,
+                                @RequestPart(value = "productInfo") RequestProductInfo productRequest) {
+        //formData의 파일이랑 글자정보를 받아온다
+        log.info("productRegister()");
+        productService.register(imageFileList, productRequest);
+    }
+
     @GetMapping("/list")
-    public List<Product> productList () {
+    public List<ProductListResponse> productList () {
         log.info("boardList()");
 
         return productService.list();
     }
 
     @GetMapping("/{productId}")
-    public Product productRead(@PathVariable("productId") Long productId) {
+    public ProductReadResponse productRead(@PathVariable("productId") Long productId) {
         log.info("productRead()");
 
         return productService.read(productId);
@@ -51,10 +64,19 @@ public class ProductController {
 
     @PutMapping("/{productId}")
     public Product productModify(@PathVariable("productId") Long productId,
-                             @RequestBody ProductRequest productRequest) {
+                                 @RequestBody ProductRequest productRequest) {
 
         log.info("productModify(): " + productRequest + "id: " + productId);
 
         return productService.modify(productId, productRequest);
+    }
+    @GetMapping("/imageList/{productId}")
+//    public List<ImageResource> readProductImageResource(
+    public List<ImageResourceResponse> readProductImageResource(
+            @PathVariable("productId") Long productId) {
+
+        log.info("readProductImageResource(): " + productId);
+
+        return productService.findProductImage(productId);
     }
 }

@@ -20,8 +20,10 @@ public class FileController {
 
     @PostMapping(value = "/uploadImgsWithText",
                 consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE })//순서상관없음
-    public String requestFileUploadWithText(@RequestPart(value = "fileList") List<MultipartFile> fileList,
+                                            //첫번째 매개변수로 파일리스트,  두번째 매개변수로 글자처리 .
+    public String requestFileUploadWithText(@RequestPart(value = "imageFileList") List<MultipartFile> fileList,
                                                 @RequestPart(value = "info") RequestFileInfo info )//매개변수2개
+            //UI에서 formData안에 이름을 imageFileList, info로 지어서 보냈기때문에 value를 저렇게 받아올수 있는것.
     { //함수시작
         log.info("글자출력"+info);//리퀘스트객체에 ToString을 만들어야 함
         try {
