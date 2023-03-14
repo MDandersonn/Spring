@@ -65,7 +65,6 @@ public class ProductServiceImpl implements ProductService {
                 writer.write(multipartFile.getBytes());//경로에 이미지 저장을한다.
                 writer.close();
 
-//              ImageResource imageResource = new ImageResource(fullPath);
                 ImageResource imageResource = new ImageResource(multipartFile.getOriginalFilename());
                 //아이디랑 이미지이름을 설정된 하나의 이미지 row를 만들고
                 imageResourceList.add(imageResource);//이미지리스트에넣고

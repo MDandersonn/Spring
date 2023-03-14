@@ -33,7 +33,7 @@ public class ProductController {
     //이미지 업로드 후 코드
     @PostMapping(value = "/register",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public void productRegister(//@RequestPart(value = "fileList") List<MultipartFile> fileList,
+    public void productRegister(
                                 @RequestPart(value = "imageFileList") List<MultipartFile> imageFileList,
                                 @RequestPart(value = "productInfo") RequestProductInfo productRequest) {
         //formData의 파일이랑 글자정보를 받아온다
@@ -71,7 +71,6 @@ public class ProductController {
         return productService.modify(productId, productRequest);
     }
     @GetMapping("/imageList/{productId}")
-//    public List<ImageResource> readProductImageResource(
     public List<ImageResourceResponse> readProductImageResource(
             @PathVariable("productId") Long productId) {
 
