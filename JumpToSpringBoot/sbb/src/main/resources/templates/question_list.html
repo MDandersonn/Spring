@@ -1,0 +1,30 @@
+<html layout:decorate="~{layout}">
+<!--템플릿 상속
+layout.html 템플릿을 상속하기 위해 <html layout:decorate="~{layout}"> 처럼 사용했다. 
+타임리프의 layout:decorate 속성은 템플릿의 레이아웃(부모 템플릿)으로 사용할 템플릿을 설정한다.
+속성의 값인 ~{layout}은 layout.html 파일을 의미한다. -->
+<div layout:fragment="content" class="container my-3">
+<table class ="table">
+    <thead class="table-dark">
+        <tr>
+			<th>번호</th>
+            <th>제목</th>
+            <th>작성일시</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="question, loop : ${questionList}">
+			<td th:text="${loop.count}"></td>
+             <td>
+                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+            </td>
+            <!-- /question/detail/과 같은 문자열과 ${question.id}와 같은 자바 객체의 값을 더할 때는
+            	 반드시 다음처럼 |과 | 기호로 좌우를 감싸 주어야 한다.
+            -->
+             <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+    </tbody>
+</table>
+<a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>
+</div>
+</html>

@@ -3,6 +3,8 @@ package com.mysite.sbb.question;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.mysite.sbb.answer.Answer;
 
 import jakarta.persistence.CascadeType;
@@ -39,6 +41,7 @@ public class Question {
     private String content;
 
     // createDate 속성의 실제 테이블의 컬럼명은 create_date가 된다
+    @CreationTimestamp
     private LocalDateTime createDate;
     
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
