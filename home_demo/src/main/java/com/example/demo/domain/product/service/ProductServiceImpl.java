@@ -48,7 +48,9 @@ public class ProductServiceImpl implements ProductService {
     public void register(List<MultipartFile> imageFileList, RequestProductInfo productRequest) {
         log.info("글자 출력: " + productRequest);
         List<ImageResource> imageResourceList = new ArrayList<>();
-        final String fixedStringPath = "../../Vue.js/home_frontend/src/assets/uploadImgs/";
+        final String fixedStringPath = "../../Vue.js-1/home_frontend/src/assets/uploadImgs/";
+        //현재위치:  git\Spring-1\home_demo 니까 스프링폴더에서나와서 vue폴더로 이동해야함.
+
         Product product = new Product();
         product.setProductName(productRequest.getProductName());
         product.setWriter(productRequest.getWriter());
