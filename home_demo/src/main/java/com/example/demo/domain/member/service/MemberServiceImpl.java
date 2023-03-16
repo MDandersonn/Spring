@@ -11,12 +11,14 @@ import com.example.demo.domain.member.repository.AuthenticationRepository;
 import com.example.demo.domain.member.service.request.MemberRegisterRequest;
 import java.util.UUID;
 import java.util.Optional;
+import com.example.demo.domain.security.service.RedisService;
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
     final private MemberRepository memberRepository;
     final private AuthenticationRepository authenticationRepository;
+    final private RedisService redisService;
     @Override
     public Boolean emailValidation(String email) {
         Optional<Member> maybeMember = memberRepository.findByEmail(email);
@@ -50,17 +52,24 @@ public class MemberServiceImpl implements MemberService {
                 memberRepository.findByEmail(memberLoginRequest.getEmail());
 
         System.out.println("loginRequest: " + memberLoginRequest);
-
+        System.out.println("maybeMember.isPresent(): " + maybeMember.isPresent());
         if (maybeMember.isPresent()) {
             Member member = maybeMember.get();
 
+            System.out.println("사용자가 입력한 비번: " + memberLoginRequest.getPassword());
+            System.out.println("비밀번호 일치 검사: " + member.isRightPassword(memberLoginRequest.getPassword()));
+
+
             if (!member.isRightPassword(memberLoginRequest.getPassword())) {
+                System.out.println("잘 들어오나 ?");
                 throw new RuntimeException("이메일 및 비밀번호 입력이 잘못되었습니다!");
             }
 
             UUID userToken = UUID.randomUUID();
 
             // redis 처리 필요
+            redisService.deleteByKey(userToken.toString());
+            redisService.setKeyAndValue(userToken.toString(), member.getId());
 
             return userToken.toString();
         }
