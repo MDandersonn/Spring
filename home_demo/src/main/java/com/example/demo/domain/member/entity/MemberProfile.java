@@ -15,7 +15,7 @@ public class MemberProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Embedded
+    @Embedded//주소라는 의미의 객체가  MemberProfile 엔티티에 삽입되었다는 의미.
     private Address address;
 
     @OneToOne(fetch = FetchType.LAZY)

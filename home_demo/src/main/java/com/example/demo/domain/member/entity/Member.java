@@ -47,5 +47,9 @@ public class Member {
                 .stream()
                 .filter(authentication -> authentication instanceof BasicAuthentication)
                 .findFirst();
+        //true가 나오는 경우.
+        // child instanceof Parent
+        // parent instanceof Parent
+        // child instanceof Child
     }
 }

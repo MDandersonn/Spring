@@ -26,8 +26,8 @@ public class RedisServiceImpl implements RedisService {
         String tempMemberId = value.get(token);
         Long memberId;
 
-        if (tempMemberId == null) { memberId = null; }
-        else { memberId = Long.parseLong(tempMemberId); }
+        if (tempMemberId == null) { memberId = null; }//토큰으로검색한 유저id가 없을때
+        else { memberId = Long.parseLong(tempMemberId); }//유저id가 있을때
 
         return memberId;
     }
