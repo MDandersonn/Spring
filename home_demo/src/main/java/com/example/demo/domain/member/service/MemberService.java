@@ -7,7 +7,7 @@ public interface MemberService {
     Boolean emailValidation(String email);
     Boolean signUp(MemberRegisterRequest memberRegisterRequest);
     String signIn(MemberLoginRequest memberLoginRequest);
-    void logout(String userToken);
+    //void logout(String userToken);//제거
 
     Boolean applyNewPassword(EmailPasswordRequest toEmailPasswordRequest);
 
