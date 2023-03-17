@@ -80,7 +80,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Boolean applyNewPassword(EmailPasswordRequest emailPasswordRequest) {
         Optional<Authentication> maybeAuthentication = authenticationRepository.findByEmail(emailPasswordRequest.getEmail());
-        if (!maybeAuthentication.isPresent()){
+        if (!maybeAuthentication.isPresent()){ //인증정보가 존재하지 않을 경우
             return false;
         }
         BasicAuthentication authentication = (BasicAuthentication)maybeAuthentication.get();
@@ -93,10 +93,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Boolean emailMatch(EmailMatchRequest toEmailMatchRequest) {
         Optional<Member> maybeMember = memberRepository.findByEmail(toEmailMatchRequest.getEmail());
-        if (!maybeMember.isPresent()){
+        if (!maybeMember.isPresent()){//이메일이 존재하지 않을경우
             return false;
         }
 
-        return true;
+        return true;//이미존재하는 이메일
     }
 }
