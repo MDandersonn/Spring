@@ -12,6 +12,8 @@ import com.example.demo.domain.member.service.request.MemberRegisterRequest;
 import java.util.UUID;
 import java.util.Optional;
 import com.example.demo.domain.security.service.RedisService;
+import com.example.demo.domain.member.service.request.EmailMatchRequest;
+import com.example.demo.domain.member.service.request.EmailPasswordRequest;
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
@@ -73,5 +75,28 @@ public class MemberServiceImpl implements MemberService {
         }
 
         throw new RuntimeException("가입된 사용자가 아닙니다!");
+    }
+
+    @Override
+    public Boolean applyNewPassword(EmailPasswordRequest emailPasswordRequest) {
+        Optional<Authentication> maybeAuthentication = authenticationRepository.findByEmail(emailPasswordRequest.getEmail());
+        if (!maybeAuthentication.isPresent()){ //인증정보가 존재하지 않을 경우
+            return false;
+        }
+        BasicAuthentication authentication = (BasicAuthentication)maybeAuthentication.get();
+        authentication.setPassword(emailPasswordRequest.getPassword());
+        authenticationRepository.save(authentication);
+
+        return true;
+    }
+
+    @Override
+    public Boolean emailMatch(EmailMatchRequest toEmailMatchRequest) {
+        Optional<Member> maybeMember = memberRepository.findByEmail(toEmailMatchRequest.getEmail());
+        if (!maybeMember.isPresent()){//이메일이 존재하지 않을경우
+            return false;
+        }
+
+        return true;//이미존재하는 이메일
     }
 }
