@@ -21,20 +21,20 @@ public class MemberController {
     final private MemberService memberService;
     final private RedisService redisService;
 
-    @PostMapping("/check-email/{email}")
+    @PostMapping("/check-email/{email}")//이메일체크
     public Boolean emailValidation(@PathVariable("email") String email) {
         log.info("emailValidation(): " + email);
 
         return memberService.emailValidation(email);
     }
-    @PostMapping("/sign-up")
+    @PostMapping("/sign-up")//회원가입
     public Boolean signUp(@RequestBody MemberRegisterForm form) {
         log.info("signUp(): " + form);
 
         return memberService.signUp(form.toMemberRegisterRequest());
     }
-
-    @PostMapping("/sign-in")
+    
+    @PostMapping("/sign-in")//로그인
     public String signIn(@RequestBody MemberLoginForm form) {
         log.info("signIn(): " + form);
 
