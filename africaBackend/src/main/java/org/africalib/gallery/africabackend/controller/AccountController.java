@@ -59,5 +59,13 @@ public class AccountController {
         //토큰을넣으면 아이디를반환
 
     }
+    @PostMapping("/api/account/logout")
+    public ResponseEntity logout(HttpServletResponse res) {
+        Cookie cookie = new Cookie("token", null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        res.addCookie(cookie);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
